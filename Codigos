@@ -1,0 +1,49 @@
+====== Nivel 1 ======
+extends Node2D
+
+
+
+func _on_Alavanca_body_entered(body): #Quando o player encostar na alavanca:
+	if $Alavanca/AnimatedSprite.frame == 0:
+		$Alavanca/AnimatedSprite.frame = 1 #Muda-se o frame para 1, mudando a animação da alavanca
+		$Porta/AnimationPlayer.play("Baixo") #Animação da porta pra cima
+
+====== Nivel 2 ======
+extends Node2D
+
+
+
+func _on_Alavanca_body_entered(body): #Quando o player encostar na alavanca:
+	if $Alavanca/AnimatedSprite.frame == 0: 
+		$Alavanca/AnimatedSprite.frame = 1 #Muda-se o frame para 1, mudando a animação da alavanca
+		$Porta2/AnimationPlayer.play("Subir") #Animação da porta pra cima
+
+====== Player ======
+extends KinematicBody2D
+
+var speed = 200 # variavel de velocidade do player
+
+func _physics_process(delta):
+	var velocidade = Vector2() # Direção de velocidade do player
+	if Input.is_action_pressed("ui_right"): # Se for precssioando a tecla direita o player irá se movimentar para a direita.
+		velocidade.x = 1
+	if Input.is_action_pressed("ui_left"):
+		velocidade.x = -1
+	if Input.is_action_pressed("ui_up"): 
+		velocidade.y = -1 # Direção para cima é negativo
+	if Input.is_action_pressed("ui_down"):
+		velocidade.y = 1 # Direção para baixo é positivo
+	velocidade = velocidade.normalized() 
+	velocidade = move_and_slide(velocidade * speed) # Movimentar o player
+	
+	
+func _on_Jogador_screen_exited(): # Quando detectar que o player saiu do level 1 muda pro level 2
+	get_tree().change_scene("res://Level 2.tscn")
+	
+  ====== Moeda ======
+  extends Area2D
+
+func _on_Coin_body_entered(body): # corpo do player
+	queue_free() # moeda vai desaparecer
+
+
