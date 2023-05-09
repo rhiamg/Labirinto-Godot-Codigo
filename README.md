@@ -1,5 +1,7 @@
 # Labirinto-Godot-Codigo
 Código usados para fazer um labirinto no Godot.
+
+
 Do latim labyrinthus, apesar de a sua origem mais remota
 vir da língua grega, o termo labirinto designa um espaço criado
 de forma artificial com diversas ruas e encruzilhadas para que a
